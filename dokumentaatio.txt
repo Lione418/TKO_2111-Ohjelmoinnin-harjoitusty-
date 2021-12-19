@@ -1,0 +1,22 @@
+Työn aiheena on elokuvateatterin varausjärjestelmä.
+
+Käyttöliittymä on tekstipohjainen. Sovellus käynnistyy käyttäjän näkymässä, mutta syöttämällä 9876 pääsee ylläpitäjän vaihtoehtoihin.
+Tarjolla olevat elokuvat ovat erillisessa .csv-tiedostossa ja niitä pääsee tarkastelemaan "Elokuvat"-valikosta.
+Elokuvateatterissa on kolme salia, joista jokaisessa kolme näytöstä jokaisena päivänä.
+Valikon "Tänään"- ja "Huomenna"-toiminnot hakevat ohjelmiston samalla koodilla kuin "Selaa ohjelmistoa", mutta tunnistavat päivän itsenäisesti.
+
+Ylläpitäjän valikosta pääsee lisäämään elokuvia.
+
+Käytetyt kirjastot ovat json (salien tilan tallentamiseen) ja datetime (kuluvan päivän tunnistamiseen).
+Salit.py -tiedostossa (joka luo tyhjän salipohjan) on myös numpy, jonka on tarkoitus olla apuna salikarttojen tulostamisessa, mutta tämä toiminto vielä puuttuu.
+
+Salien istumapaikat ovat matriisimuotoisia ja ne on tallennettu näytöstunnisteiden (päivä + näytöksen nro, elokuvan nimi) kanssa sanakirjana .json-tiedostoon.
+
+Ohjelma määrittelee ensin kuluvan päivän, nimeää muutkin päivät sekä tuo elokuva- ja salitiedot tiedostoista.
+
+Funktiot:
+lisaaElokuva() - kysyy käyttäjältä lisättävät arvot, kirjoittaa ne tiedoston jatkoksi sekä lisää ne jo avattuun elokuvalistaukseen
+elokuvavalikko() - tulostaa tarjolla olevat elokuvat
+haeOhjelmisto(paiva: str) - hakee salitiedoista tietyn päivän koko tarjonnan
+ohjelmisto() - kysyy käyttäjältä päivän ja tulostaa sen päivän ohjelmiston
+varaaPaikka() - ohitettu. Tämän on tarkoitus tulostaa valitun näytöksen salikartta, josta käyttäjä pääsee valitsemaan varattavat istumapaikat.
