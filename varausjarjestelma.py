@@ -1,6 +1,6 @@
 import json
-#Tuodaan aikaominaisuudet, jotta ohjelma tietää mikä päivä on
 import datetime
+#Luodaan aikaominaisuudet, jotta ohjelma tietää mikä päivä on ja osaa nimetä ne
 tanaan = datetime.date.today()
 #Lopussa ylimääräinen maanantai, jotta "huomenna"-toiminnot toimivat sunnuntainakin
 vkPv = ("maanantai","tiistai","keskiviikko","torstai","perjantai","lauantai","sunnuntai","maanantai")
@@ -46,56 +46,41 @@ def elokuvavalikko():
             tiedot += i
         print(f"{nimi}{tiedot}")
 
-def tanaanOhjelmistossa():
-    print(f"Tänään on {vkPv[viikonpv]}. Päivän näytökset: ")
-    with open("pieni_sali.json", 'r') as f:
-        pieni_sali = json.load(f)
+
+def haeOhjelmisto(paiva: str):
     print("Pieni sali: ")
-    print("klo 12 --- " + pieni_sali[f"{pv[viikonpv]}1e"])
-    print("klo 15 --- "+ pieni_sali[f"{pv[viikonpv]}2e"])
-    print("klo 18 --- "+ pieni_sali[f"{pv[viikonpv]}3e"])
+    print("klo 12 --- " + pieni_sali[f"{paiva}1e"])
+    print("klo 15 --- "+ pieni_sali[f"{paiva}2e"])
+    print("klo 18 --- "+ pieni_sali[f"{paiva}3e"])
 
-    with open("heureka_sali.json", 'r') as f:
-        heureka_sali = json.load(f)
+   
     print("Heureka-sali: ")
-    print("klo 12 --- " + heureka_sali[f"{pv[viikonpv]}1e"])
-    print("klo 15 --- "+ heureka_sali[f"{pv[viikonpv]}2e"])
-    print("klo 18 --- "+ heureka_sali[f"{pv[viikonpv]}3e"])
+    print("klo 12 --- " + heureka_sali[f"{paiva}1e"])
+    print("klo 15 --- "+ heureka_sali[f"{paiva}2e"])
+    print("klo 18 --- "+ heureka_sali[f"{paiva}3e"])
 
-    with open("iso_sali.json", 'r') as f:
-        iso_sali = json.load(f)
+    
     print("Iso sali: ")
-    print("klo 12 --- " + iso_sali[f"{pv[viikonpv]}1e"])
-    print("klo 15 --- "+ iso_sali[f"{pv[viikonpv]}2e"])
-    print("klo 18 --- "+ iso_sali[f"{pv[viikonpv]}3e"])
+    print("klo 12 --- " + iso_sali[f"{paiva}1e"])
+    print("klo 15 --- "+ iso_sali[f"{paiva}2e"])
+    print("klo 18 --- "+ iso_sali[f"{paiva}3e"])
 
-
-
-def huomennaOhjelmistossa():
-    print(f"Huomenna on {vkPv[viikonpv + 1]}. Huomisen näytökset: ")
-    with open("pieni_sali.json", 'r') as f:
-        pieni_sali = json.load(f)
-    print("Pieni sali: ")
-    print("klo 12 --- " + pieni_sali[f"{pv[viikonpv+1]}1e"])
-    print("klo 15 --- "+ pieni_sali[f"{pv[viikonpv+1]}2e"])
-    print("klo 18 --- "+ pieni_sali[f"{pv[viikonpv+1]}3e"])
-
-    with open("heureka_sali.json", 'r') as f:
-        heureka_sali = json.load(f)
-    print("Heureka-sali: ")
-    print("klo 12 --- " + heureka_sali[f"{pv[viikonpv+1]}1e"])
-    print("klo 15 --- "+ heureka_sali[f"{pv[viikonpv+1]}2e"])
-    print("klo 18 --- "+ heureka_sali[f"{pv[viikonpv+1]}3e"])
-
-    with open("iso_sali.json", 'r') as f:
-        iso_sali = json.load(f)
-    print("Iso sali: ")
-    print("klo 12 --- " + iso_sali[f"{pv[viikonpv]}1e"])
-    print("klo 15 --- "+ iso_sali[f"{pv[viikonpv]}2e"])
-    print("klo 18 --- "+ iso_sali[f"{pv[viikonpv]}3e"])
 
 def ohjelmisto():
-    pass
+    jatketaan = True
+    while jatketaan:
+        print("Valitse päivä (ma/ti/ke/to/pe/la/su),")
+        print("palaa (P) tai varaa näistä (V)")
+        z = input()
+        if z == "P":
+            jatketaan = False
+        elif z == "V":
+            varaaPaikka
+        else:
+            try:
+                haeOhjelmisto(z)
+            except:
+                print("Yritä uudestaan.")
 
 def varaaPaikka():
     pass
@@ -119,11 +104,14 @@ while jatkuu:
 
     #Tänään ohjelmistossa
     elif x == "T":
-        tanaanOhjelmistossa()
+        print(f"Tänään on {vkPv[viikonpv]}. Päivän näytökset: ")
+    
+        haeOhjelmisto(pv[viikonpv])
 
     #Huomenna ohjelmistossa
     elif x == "H":
-        huomennaOhjelmistossa()
+        print(f"Huomenna on {vkPv[viikonpv + 1]}. Huomisen näytökset: ")
+        haeOhjelmisto(pv[viikonpv +1])
 
     #Selaa ohjelmistoa
     elif x == "S":
