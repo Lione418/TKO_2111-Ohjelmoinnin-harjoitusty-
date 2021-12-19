@@ -83,11 +83,3 @@ with open("heureka_sali.json", 'w') as f:
     json.dump(heureka_sali, f, indent=2)
 with open("iso_sali.json", 'w') as f:
     json.dump(iso_sali, f, indent=2)
-
-#Esimerkki salikartan tulostamisesta
-import numpy as np
-
-a = np.array(pieni_sali["ti3"])
-
-for line in a:
-    print ('  '.join(map(str, line)))
