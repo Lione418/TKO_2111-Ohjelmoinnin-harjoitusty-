@@ -12,11 +12,13 @@ with open("elokuvat.csv") as tiedosto:
         elokuvat[tiedot[0]] = [tiedot[1],tiedot[2]]
 
 def lisaaElokuva():
-    avain = input("Anna elokuvan nimi: ")
+    avain = input("Anna elokuvan nimi (tai poistu painamalla P): ")
+    if avain == "P":
+        return
     arvo1 = input("Anna elokuvan ikäraja: ")
     arvo2 = input("Anna elokuvan kesto (esim. '1h 33min'): ")
     f = open("elokuvat.csv", "a")
-    f.write(f"{avain},{arvo1},{arvo2}")
+    f.write(f"{avain},{arvo1},{arvo2}\n")
     f.close()
     print(f"Lisäsit elokuvan: {avain}, {arvo1}, {arvo2}")
     elokuvat[avain] = [arvo1,arvo2]
@@ -39,7 +41,7 @@ def huomennaOhjelmistossa():
 def ohjelmisto():
     pass
 
-
+#Game on
 print("Tervetuloa!")
 jatkuu = True
 while jatkuu:
@@ -73,12 +75,16 @@ while jatkuu:
 
     #Ylläpitäjän käyttöliittymä
     elif x == "9876":
-        admin = True
         print("Hei ylläpitäjä!")
-        while admin == True:
+        admin = True
+        while admin:
             print("(1) Lisää elokuva")
+            print("(X) Palaa päävalikkoon")
             y = input()
 
             if y == "1":
-                lisaaElokuva
+                lisaaElokuva()
+
+            elif y == "X":
+                admin = False
     
